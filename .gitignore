@@ -46,6 +46,10 @@ paper_artifacts/NeurIPS_2026/checklist.tex
 # Kaggle instructions (not needed for local review)
 KAGGLE_RUN.md
 
+# Local GPU runner and CUDA-specific requirements
+run_local_benchmark.ps1
+requirements-cuda.txt
+
 # Python
 __pycache__/
 *.pyc
