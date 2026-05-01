@@ -33,6 +33,18 @@ paper_artifacts/croissant_rai_fields_template.json
 paper_artifacts/manual_error_analysis_instructions.md
 paper_artifacts/responsible_ai_metadata_draft.md
 paper_artifacts/NeurIPS_2026/README_LEGALBRAIN.md
+paper_artifacts/heldout_error_analysis_reviewed.md
+paper_artifacts/provenance_licensing_due_diligence.md
+paper_artifacts/submission_checklist.md
+paper_artifacts/results_tables.md
+
+# NeurIPS template example file (not the actual paper)
+paper_artifacts/NeurIPS_2026/neurips_2026.tex
+# Blank checklist template (checklist_completed.tex has the answers)
+paper_artifacts/NeurIPS_2026/checklist.tex
+
+# Kaggle instructions (not needed for local review)
+KAGGLE_RUN.md
 
 # Python
 __pycache__/
