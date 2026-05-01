@@ -3,13 +3,36 @@
 .uv-cache/
 .uv-python/
 
-# Benchmark outputs (large jsonl prediction files)
+# Benchmark outputs (large jsonl prediction files + configs)
 benchmark_outputs/*/predictions.jsonl
 benchmark_outputs/*/config.json
 
-# Heldout benchmark data (large jsonl files — not uploaded; described in paper)
+# Heldout benchmark data (large jsonl files — described in paper)
 paper_artifacts/heldout_benchmark/eval.jsonl
 paper_artifacts/heldout_benchmark/corpus.jsonl
+
+# Notebooks (may contain secrets / API keys)
+*.ipynb
+
+# Compiled PDFs (compile from .tex source)
+*.pdf
+
+# HuggingFace readme / dataset card drafts
+readme_huggingface.txt
+paper_artifacts/huggingface_dataset_card.md
+
+# Zip archives (LaTeX template downloads)
+*.zip
+
+# Raw CSV error analysis files
+*.csv
+
+# Draft / working files not needed for review
+paper_artifacts/neurips_ed_draft.tex
+paper_artifacts/croissant_rai_fields_template.json
+paper_artifacts/manual_error_analysis_instructions.md
+paper_artifacts/responsible_ai_metadata_draft.md
+paper_artifacts/NeurIPS_2026/README_LEGALBRAIN.md
 
 # Python
 __pycache__/
