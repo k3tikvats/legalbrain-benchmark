@@ -1,0 +1,34 @@
+# HuggingFace and model caches (large)
+.hf-cache/
+.uv-cache/
+.uv-python/
+
+# Benchmark outputs (large jsonl prediction files)
+benchmark_outputs/*/predictions.jsonl
+benchmark_outputs/*/config.json
+
+# Heldout benchmark data (large jsonl files — not uploaded; described in paper)
+paper_artifacts/heldout_benchmark/eval.jsonl
+paper_artifacts/heldout_benchmark/corpus.jsonl
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.venv/
+venv/
+
+# LaTeX build artifacts
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+*.synctex.gz
+*.fls
+*.fdb_latexmk
+
+# OS
+.DS_Store
+Thumbs.db

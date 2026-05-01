@@ -1,0 +1,29 @@
+{
+  "dataset": "Prarabdha/indian-legal-supervised-fine-tuning-data",
+  "split": "train",
+  "eval_size": 500,
+  "retrieval_corpus_size": 20000,
+  "model_name": null,
+  "retriever": "tfidf",
+  "dense_model_name": null,
+  "eval_file": "paper_artifacts/heldout_benchmark/eval.jsonl",
+  "corpus_file": "paper_artifacts/heldout_benchmark/corpus.jsonl",
+  "device": "cuda",
+  "cuda_available": true,
+  "gpu_name": "NVIDIA GeForce RTX 3050 6GB Laptop GPU",
+  "use_retrieved_context": false,
+  "retrieval": {
+    "recall_at_1": 0.492,
+    "recall_at_5": 0.694,
+    "recall_at_10": 0.768,
+    "mrr": 0.5790547619047619
+  },
+  "answering": {
+    "context_support": 1.0,
+    "exact_match": 0.0,
+    "retrieval_rank": 1.666,
+    "rouge_l": 0.19218895306700606,
+    "token_f1": 0.24291100446173677
+  },
+  "seconds": 40.98
+}

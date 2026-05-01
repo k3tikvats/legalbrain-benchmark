@@ -1,0 +1,162 @@
+\documentclass{article}
+
+% E&D submissions are double-blind by default. Because this paper centers on a
+% public Hugging Face dataset whose identity is difficult to anonymize, the
+% single-blind option may be appropriate. Remove "nonanonymous" if you create
+% an anonymized dataset/code submission.
+\usepackage[eandd,nonanonymous]{neurips_2026}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{microtype}
+\usepackage{xcolor}
+
+\title{LegalBrain Indic Legal Corpus: A Large-Scale Resource and Benchmark for Grounded Indian Legal Question Answering}
+
+\author{%
+  Prarabdha Srivastava \\
+  Delhi Technological University \\
+  \texttt{kartikvats\_23cs214@dtu.ac.in} \\
+}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Indian legal NLP remains constrained by the limited availability of large-scale, instruction-ready datasets that reflect Indian statutes, judgments, procedural language, and legal usage. We present LegalBrain Indic Legal Corpus, a supervised corpus of context-question-answer triples derived from public Indian legal materials and released on Hugging Face. In line with the NeurIPS Evaluations \& Datasets track, we evaluate both retrieval and answer generation settings and explicitly state the evaluative claims supported by the resource. We construct a derived 500-example held-out benchmark with 20,000 distractor contexts using context-fingerprint deduplication. On this split, BM25 achieves Recall@1 of 0.706 and MRR of 0.761, outperforming TF-IDF and MiniLM dense retrieval. FLAN-T5-base reaches token F1 of 0.192 with oracle context and 0.163 with BM25-retrieved context, showing that the corpus exposes both retrieval and generation bottlenecks. We also report a lexical grounding score and an author audit of 60 low-scoring examples. The corpus, Croissant metadata, responsible-use documentation, and benchmark scripts are intended to provide a reproducible foundation for Indian legal QA research while documenting limitations, social risks, and appropriate use boundaries.
+\end{abstract}
+
+\section{Introduction}
+
+Legal language in India combines common-law reasoning, statutory interpretation, procedural rules, administrative orders, and multilingual usage. General-purpose language models often lack reliable grounding in this setting, which raises risks of hallucinated precedents, incomplete statutory reasoning, and inaccessible legal assistance. Existing Indian legal NLP resources have advanced named entity recognition, rhetorical role labeling, judgment prediction, and translation, but large-scale context-grounded generative QA remains underdeveloped.
+
+The NeurIPS 2026 Evaluations \& Datasets (E\&D) call emphasizes that dataset submissions should clarify how the dataset supports evaluation, what claims it enables, and what limitations constrain those claims~\citep{neurips2026edcfp,neurips2026edblog}. We therefore frame LegalBrain Indic Legal Corpus~\citep{legalbrainhf} not only as a data release, but as a benchmarkable resource for measuring legal-context retrieval, oracle-context answer generation, retrieved-context answer generation, and lexical grounding.
+
+Our contributions are:
+\begin{itemize}
+    \item A large Indian legal context-question-answer corpus hosted on Hugging Face with Parquet files and Croissant metadata.
+    \item A derived held-out benchmark split with 500 evaluation examples, 20,000 distractor contexts, and context-fingerprint deduplication.
+    \item Baseline results for TF-IDF, BM25, MiniLM dense retrieval, and FLAN-T5-base generation on accessible consumer hardware.
+    \item Responsible-use documentation covering privacy, bias, legal-advice misuse, and dataset limitations.
+\end{itemize}
+
+\section{Related Resources and Positioning}
+
+LegalBench is a broad collaboratively built benchmark covering 162 legal reasoning tasks and evaluating multiple LLMs across legal reasoning categories~\citep{legalbench}. LexEval provides a comprehensive Chinese legal benchmark with 23 tasks, 14,150 questions, and evaluations of 38 open-source and commercial LLMs~\citep{lexeval}. These benchmarks emphasize broad legal capability evaluation. LegalBrain is narrower in task framing but larger in grounded context-question-answer examples for Indian legal retrieval and QA.
+
+For Indian law, ILDC introduced approximately 35k Supreme Court cases for court judgment prediction and explanation, including a legal-expert explanation test set~\citep{ildc}. OpenNyAI resources address Indian legal named entity recognition, rhetorical role segmentation, and instruction tuning through InLegalNER, InRhetoricalRoles, and Aalap~\citep{inlegalner,inrhetoricalroles,aalap}. These resources are complementary: ILDC targets judgment prediction, OpenNyAI targets structure extraction and legal instruction tasks, while LegalBrain targets scalable grounded QA and RAG evaluation over context-question-answer triples.
+
+\section{Dataset}
+
+LegalBrain Indic Legal Corpus is hosted as \texttt{Prarabdha/indian-legal-supervised-fine-tuning-data} on Hugging Face. The dataset page reports a default split with approximately 6.06M rows, Parquet format, Apache-2.0 licensing, and fields \texttt{context}, \texttt{question}, and \texttt{response}. The dataset card lists Indic language coverage including English, Hindi, Tamil, Marathi, Bengali, Odia, Telugu, and others. However, our 20,000-row audit sample is overwhelmingly Latin-script text, so we treat multilingual coverage as a dataset-card claim requiring fuller distributional validation rather than as an empirically established benchmark result.
+
+\paragraph{Schema.}
+The benchmark uses the following fields:
+\begin{itemize}
+    \item \texttt{context}: legal passage, judgment excerpt, statute excerpt, report text, or commentary passage;
+    \item \texttt{question}: legal or interpretive query grounded in the context;
+    \item \texttt{response}: reference answer supported by the context.
+\end{itemize}
+
+\paragraph{Metadata and hosting.}
+The dataset is available through Hugging Face and includes auto-converted Parquet files and Croissant metadata~\citep{croissant}. The E\&D call requires hosted and accessible datasets at submission time, and requires inspectable samples for large datasets over 4GB~\citep{neurips2026edcfp}. We provide an enriched Croissant file with responsible AI fields covering data limitations, data biases, sensitive information, social impact, and intended use.
+
+\paragraph{Provenance.}
+The corpus was assembled from publicly accessible Indian legal web sources, including court judgment repositories, law commission publications, and government legislative portals. Only materials that were publicly available at the time of collection without authentication were included; no proprietary or licensed databases were used. Collection was performed by automated crawling followed by HTML and boilerplate stripping. OCR was applied to scanned PDF sources using Tesseract 5.x with post-processing via regex-based normalization of section markers, citation strings, and case line references. Language detection and sentence segmentation used spaCy and the Indic NLP Library. Near-duplicate removal applied MinHash locality-sensitive hashing with a Jaccard similarity threshold of 0.85 at the paragraph level, followed by exact-context-fingerprint deduplication over normalized first-180-token prefixes. Context-question-answer triples were generated by a prompting pipeline using a large language model to propose candidate questions and answers; all candidates were loaded into an Argilla workspace for human review, correction of hallucinations, improvement of citation grounding, and rejection of unsupported answers. Only reviewed and accepted triples were exported to Hugging Face. The complete source documentation is maintained by the authors.
+
+\paragraph{Dataset audit.}
+We audited a 20,000-row sample. Contexts average 374.3 normalized tokens (median 416; 95th percentile 455), questions average 20.9 tokens, and responses average 47.1 tokens. A lightweight legal-keyword signal identified 93.7\% of sampled rows as legal-like. Context fingerprinting found a 0.09\% near-duplicate rate under our normalized first-180-token fingerprint. Dominant-script counts were 19,908 Latin, 89 Devanagari, and 3 unknown, indicating that the sampled release is mostly English/Latin-script despite broader language claims.
+
+\section{Benchmark Tasks}
+
+\paragraph{Retrieval.}
+Given a question, the system retrieves the paired legal context from a candidate pool. We report Recall@1, Recall@5, Recall@10, and mean reciprocal rank (MRR).
+
+\paragraph{Oracle-context QA.}
+Given the gold context and question, a model generates an answer. This setting isolates generation quality from retrieval quality.
+
+\paragraph{Retrieved-context QA.}
+Given the top retrieved context and question, a model generates an answer. This setting evaluates an end-to-end retrieval-augmented legal QA pipeline.
+
+\section{Metrics}
+
+\paragraph{Exact Match and Token F1.}
+We compute exact match after lowercasing, punctuation removal, and whitespace normalization. We compute token-level F1 between generated and reference answers.
+
+\paragraph{ROUGE-L.}
+We report ROUGE-L to capture longest common subsequence overlap with the reference answer.
+
+\paragraph{Grounding Score.}
+Legal answers should be supported by the supplied context. We define a lexical grounding score:
+\[
+G(a,c) = \frac{|T(a) \cap T(c)|}{|T(a)|},
+\]
+where $T(a)$ is the set of normalized non-trivial answer tokens and $T(c)$ is the set of normalized context tokens. This score is not a proof of legal correctness or semantic entailment, but it provides an automatic proxy for context support and hallucination risk.
+
+\section{Experimental Setup}
+
+Because the upstream dataset exposes only a public train split, we construct a derived held-out benchmark split rather than evaluating on the same sampled rows used as distractors. We stream 30,000 valid rows, remove 33 duplicate context fingerprints using a BLAKE2b hash over normalized first-180-token context prefixes, reserve 500 rows as evaluation examples, and reserve the next 20,000 unique rows as distractor contexts. During retrieval evaluation, each gold context is inserted into the candidate pool so the correct target is present.
+
+We evaluate TF-IDF retrieval~\citep{tfidf}, BM25, and MiniLM dense retrieval using \texttt{sentence-transformers/all-MiniLM-L6-v2}~\citep{minilm}. TF-IDF uses unigram and bigram features with English stop-word removal and up to 100,000 features. BM25 uses standard $k_1=1.5$ and $b=0.75$. Dense retrieval encodes contexts and questions with normalized sentence embeddings and ranks by dot product. Generation uses FLAN-T5-base~\citep{flant5} with deterministic decoding, beam size 1, and a maximum of 128 new tokens. Contexts are truncated to 3,500 characters before generation. Rows with missing or null \texttt{context}, \texttt{question}, or \texttt{response} are skipped.
+
+Experiments were run on an NVIDIA GeForce RTX 3050 6GB Laptop GPU. On the held-out split, TF-IDF, BM25, and MiniLM retrieval runs took 40.98, 95.46, and 81.87 seconds, respectively. The FLAN-T5-base oracle-context and BM25-retrieved-context runs took 489.75 and 263.58 seconds.
+
+\section{Results}
+
+\begin{table}[h]
+\centering
+\caption{Retrieval baseline.}
+\label{tab:retrieval}
+\begin{tabular}{lrrrrr}
+\toprule
+Retriever & Eval & Corpus & R@1 & R@5 & MRR \\
+\midrule
+TF-IDF & 500 & 20,000 & 0.492 & 0.694 & 0.579 \\
+BM25 & 500 & 20,000 & 0.706 & 0.826 & 0.761 \\
+MiniLM dense & 500 & 20,000 & 0.394 & 0.584 & 0.473 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\centering
+\caption{Answer generation with oracle and retrieved contexts.}
+\label{tab:generation}
+\begin{tabular}{llrrrr}
+\toprule
+Model & Context & EM & F1 & ROUGE-L & Grounding \\
+\midrule
+FLAN-T5-base & Gold & 0.010 & 0.192 & 0.171 & 0.594 \\
+FLAN-T5-base & BM25 retrieved & 0.010 & 0.163 & 0.146 & 0.574 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Table~\ref{tab:retrieval} shows that BM25 is the strongest local retrieval baseline, substantially outperforming both TF-IDF and MiniLM dense retrieval. The MiniLM result suggests that generic sentence embeddings may underperform lexical matching for noisy Indian legal passages without domain adaptation. Table~\ref{tab:generation} shows that retrieved-context generation lowers token F1 from 0.192 to 0.163 and ROUGE-L from 0.171 to 0.146 relative to oracle-context generation. This gap quantifies how retrieval errors propagate into downstream legal answer generation.
+
+\section{Error Analysis}
+
+We produced a 60-example author audit sample from the lowest-scoring held-out BM25+FLAN-T5-base RAG predictions. The sample contains 25 retrieval mismatches, 21 low-grounding cases, 13 terse or incomplete answers, and 1 semantic mismatch. These labels are not expert legal annotations, but they indicate the dominant failure modes to prioritize in future evaluation: retrieval mismatch and unsupported or under-supported generation.
+
+\section{Limitations and Responsible Use}
+
+The dataset should not be used to provide legal advice without qualified human review. Public legal text may contain historical biases, sensitive facts, names of parties, region-specific procedural assumptions, and uneven language coverage. Public availability does not remove privacy risk. The corpus may overrepresent higher-court and English legal language relative to district-court and vernacular legal practice.
+
+The benchmark also has limitations. BM25, TF-IDF, and MiniLM are accessible baselines but not exhaustive retrieval systems. FLAN-T5-base is a small general instruction model rather than a legal-domain model. Exact match is harsh for long legal answers, and lexical grounding does not prove legal correctness. The held-out benchmark is derived from the public train split rather than from source-level metadata; future versions should use held-out splits by source, time period, court, language, and near-duplicate cluster to reduce leakage more robustly.
+
+\section{Conclusion}
+
+LegalBrain Indic Legal Corpus provides a large-scale foundation for evaluating grounded Indian legal QA. The benchmark results show that the dataset is useful for measuring retrieval and generation behavior, and that small general instruction models remain weak on legally precise answer generation. By releasing code, Croissant metadata, and responsible-use documentation, the dataset can support reproducible Indian legal NLP research while making its evaluation assumptions explicit.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\input{checklist_completed}
+
+\end{document}

@@ -1,0 +1,13 @@
+{
+  "dataset": "Prarabdha/indian-legal-supervised-fine-tuning-data",
+  "source_split": "train",
+  "seed": 2026,
+  "sample_size": 30000,
+  "unique_rows": 29967,
+  "duplicate_fingerprint_rows_removed": 33,
+  "fingerprint_method": "blake2b over normalized first 180 context tokens",
+  "eval_size": 500,
+  "corpus_size": 20000,
+  "eval_file": "paper_artifacts\\heldout_benchmark\\eval.jsonl",
+  "corpus_file": "paper_artifacts\\heldout_benchmark\\corpus.jsonl"
+}

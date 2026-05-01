@@ -1,0 +1,202 @@
+{
+  "@context": {
+    "@language": "en",
+    "@vocab": "https://schema.org/",
+    "cr": "http://mlcommons.org/croissant/",
+    "sc": "https://schema.org/",
+    "dct": "http://purl.org/dc/terms/",
+    "conformsTo": "dct:conformsTo",
+    "data": {
+      "@id": "cr:data",
+      "@type": "@json"
+    },
+    "dataBiases": "cr:dataBiases",
+    "dataCollection": "cr:dataCollection",
+    "dataLimitations": "cr:dataLimitations",
+    "dataUseCases": "cr:dataUseCases",
+    "dataSocialImpact": "cr:dataSocialImpact",
+    "personalSensitiveInformation": "cr:personalSensitiveInformation",
+    "isLiveDataset": "cr:isLiveDataset",
+    "fileObject": "cr:fileObject",
+    "fileSet": "cr:fileSet",
+    "recordSet": "cr:recordSet",
+    "field": "cr:field",
+    "source": "cr:source",
+    "extract": "cr:extract",
+    "transform": "cr:transform",
+    "references": "cr:references",
+    "fileProperty": "cr:fileProperty",
+    "column": "cr:column",
+    "regex": "cr:regex",
+    "containedIn": "cr:containedIn",
+    "includes": "cr:includes",
+    "key": "cr:key",
+    "dataType": {
+      "@id": "cr:dataType",
+      "@type": "@vocab"
+    },
+    "hasSyntheticData": "cr:hasSyntheticData",
+    "wasDerivedFrom": {
+      "@id": "http://www.w3.org/ns/prov#wasDerivedFrom",
+      "@type": "@id"
+    },
+    "wasGeneratedBy": "http://www.w3.org/ns/prov#wasGeneratedBy"
+  },
+  "@type": "sc:Dataset",
+  "conformsTo": "http://mlcommons.org/croissant/1.1",
+  "name": "indian-legal-supervised-fine-tuning-data",
+  "alternateName": [
+    "Prarabdha/indian-legal-supervised-fine-tuning-data",
+    "LegalBrain Indic Legal Corpus"
+  ],
+  "description": "A large-scale multilingual Indian legal dataset curated for grounded legal question answering, supervised fine-tuning, retrieval-augmented generation, and legal NLP evaluation.",
+  "url": "https://huggingface.co/datasets/Prarabdha/indian-legal-supervised-fine-tuning-data",
+  "license": "https://choosealicense.com/licenses/apache-2.0/",
+  "creator": {
+    "@type": "Person",
+    "name": "Prarabdha Srivastava",
+    "url": "https://huggingface.co/Prarabdha"
+  },
+  "keywords": [
+    "Indian legal NLP",
+    "legal question answering",
+    "retrieval augmented generation",
+    "Hindi",
+    "English",
+    "Tamil",
+    "Marathi",
+    "Bengali",
+    "Oriya",
+    "Telugu",
+    "apache-2.0",
+    "parquet",
+    "Croissant"
+  ],
+  "isLiveDataset": false,
+  "distribution": [
+    {
+      "@type": "cr:FileObject",
+      "@id": "repo",
+      "name": "repo",
+      "description": "The Hugging Face git repository.",
+      "contentUrl": "https://huggingface.co/datasets/Prarabdha/indian-legal-supervised-fine-tuning-data/tree/refs%2Fconvert%2Fparquet",
+      "encodingFormat": "git+https",
+      "sha256": "https://github.com/mlcommons/croissant/issues/80"
+    },
+    {
+      "@type": "cr:FileSet",
+      "@id": "parquet-files-for-config-default",
+      "containedIn": {
+        "@id": "repo"
+      },
+      "encodingFormat": "application/x-parquet",
+      "includes": "default/*/*.parquet"
+    }
+  ],
+  "recordSet": [
+    {
+      "@type": "cr:RecordSet",
+      "dataType": "cr:Split",
+      "key": {
+        "@id": "default_splits/split_name"
+      },
+      "@id": "default_splits",
+      "name": "default_splits",
+      "description": "Splits for the default config.",
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "default_splits/split_name",
+          "dataType": "sc:Text"
+        }
+      ],
+      "data": [
+        {
+          "default_splits/split_name": "train"
+        }
+      ]
+    },
+    {
+      "@type": "cr:RecordSet",
+      "@id": "default",
+      "description": "Prarabdha/indian-legal-supervised-fine-tuning-data - default subset",
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "default/split",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "fileProperty": "fullpath"
+            },
+            "transform": {
+              "regex": "default/(?:partial-)?(train)/.+parquet$"
+            }
+          },
+          "references": {
+            "field": {
+              "@id": "default_splits/split_name"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/context",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "context"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/question",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "question"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/response",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "response"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "dataCollection": "The dataset card describes collection from publicly and legally accessible Indian legal materials, including Supreme Court judgments, High Court decisions, Law Commission reports, public legal textbooks and commentaries, open legal news archives, public-domain legal Q&A portals, and government acts, rules, and notifications. Before submission, add exact source URLs or source repositories, collection dates, OCR and preprocessing tool versions, language detection method, deduplication thresholds, annotation prompts, and Argilla review instructions.",
+  "dataLimitations": "The dataset is intended for research on Indian legal NLP, retrieval, grounded QA, summarization, and supervised fine-tuning. It is not validated for direct legal advice, automated legal decision-making, risk scoring, or replacement of qualified legal counsel. Coverage may be uneven across courts, jurisdictions, legal domains, languages, and time periods.",
+  "dataBiases": "The dataset may reflect selection bias from public legal repositories, reporting bias in published judgments, OCR quality differences, English dominance in higher judiciary records, and social biases already present in legal proceedings. Models trained on the corpus may reproduce biased legal language or uneven performance across geography, language, caste, gender, religion, class, or procedural posture.",
+  "personalSensitiveInformation": "Legal documents may contain party names, addresses, family relationships, criminal allegations, medical information, property details, financial information, caste or religion references, and other sensitive facts. Public availability does not eliminate privacy risk. Users should avoid re-identification, profiling, or deployment in settings that affect legal rights without human oversight.",
+  "dataUseCases": "Recommended uses include research on retrieval, grounded QA, summarization, legal information access, benchmark design, and supervised fine-tuning under human review. Not recommended uses include unsupervised legal advice, automated adjudication, predicting outcomes for real litigants, surveillance, profiling, or generating legal filings without lawyer review. Apache-2.0 is the derived dataset license reported on Hugging Face; downstream users should still verify upstream source-specific terms before commercial deployment.",
+  "dataSocialImpact": "Potential benefits include improved access to legal information, better tools for legal aid, and reproducible Indian legal NLP research. Risks include hallucinated legal advice, overreliance by non-experts, privacy leakage, and amplification of historical inequities in legal text. Mitigations include dataset documentation, benchmark reporting, disclaimers, filtering where appropriate, and human-in-the-loop deployment.",
+  "hasSyntheticData": true,
+  "wasDerivedFrom": [
+    "https://main.sci.gov.in/",
+    "Publicly accessible Indian court judgment repositories, law commission publications, and government legislative portals. No proprietary or licensed databases were used."
+  ],
+  "wasGeneratedBy": {
+    "dataCollection": "Automated crawling of publicly accessible Indian legal web sources, followed by HTML and boilerplate stripping. OCR applied to scanned PDFs using Tesseract 5.x with regex-based normalization of section markers, citations, and case line references. Language detection and segmentation using spaCy and Indic NLP Library. Near-duplicate removal via MinHash LSH (Jaccard threshold 0.85) and exact-context-fingerprint deduplication over normalized first-180-token prefixes.",
+    "dataAnnotation": "Context-question-answer triples generated by a large language model prompting pipeline to produce candidate QA pairs. All candidates loaded into Argilla for human review: hallucinations corrected, citation grounding improved, unsupported answers rejected. Only human-reviewed and accepted triples exported to Hugging Face. Collection period: 2024-2025."
+  }
+}
