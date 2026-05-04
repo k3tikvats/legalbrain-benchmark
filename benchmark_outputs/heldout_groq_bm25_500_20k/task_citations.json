@@ -1,0 +1,8 @@
+{
+  "n_rows_with_citations": 201,
+  "n_total_rows": 500,
+  "citation_coverage_pct": 40.2,
+  "n_pairs": 201,
+  "exact_citation_match": 0.5423,
+  "citation_token_f1": 0.224
+}

@@ -25,5 +25,10 @@
     "rouge_l": 0.14560949487066108,
     "token_f1": 0.1633213173085312
   },
-  "seconds": 263.58
+  "seconds": 263.58,
+  "inlegal_sim": {
+    "mean_inlegal_sim": 0.6101,
+    "model": "law-ai/InLegalBERT",
+    "n": 500
+  }
 }

@@ -11,3 +11,7 @@ sentencepiece>=0.2.0
 protobuf>=4.25.0
 safetensors>=0.4.0
 sentence-transformers>=3.0.0
+# Extended baselines and tasks
+groq>=0.9.0                   # Groq free-tier API (Llama-3.1-8B, Llama-3.3-70B)
+scipy>=1.13.0                  # softmax for NLI faithfulness
+bitsandbytes>=0.43.0           # 4-bit / 8-bit quantization (CausalLMAnswerer)

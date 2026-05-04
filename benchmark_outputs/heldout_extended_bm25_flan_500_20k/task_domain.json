@@ -1,0 +1,64 @@
+{
+  "Civil": {
+    "n": 69,
+    "recall_at_1": 0.6377,
+    "mrr": 0.6912,
+    "token_f1": 0.1385,
+    "rouge_l": 0.1146
+  },
+  "Constitutional": {
+    "n": 171,
+    "recall_at_1": 0.7544,
+    "mrr": 0.8116,
+    "token_f1": 0.1756,
+    "rouge_l": 0.1532
+  },
+  "Contract": {
+    "n": 47,
+    "recall_at_1": 0.7234,
+    "mrr": 0.7871,
+    "token_f1": 0.1886,
+    "rouge_l": 0.1639
+  },
+  "Criminal": {
+    "n": 85,
+    "recall_at_1": 0.5176,
+    "mrr": 0.5972,
+    "token_f1": 0.1774,
+    "rouge_l": 0.1514
+  },
+  "Family": {
+    "n": 11,
+    "recall_at_1": 0.8182,
+    "mrr": 0.8864,
+    "token_f1": 0.2291,
+    "rouge_l": 0.1976
+  },
+  "Other": {
+    "n": 38,
+    "recall_at_1": 0.7105,
+    "mrr": 0.7406,
+    "token_f1": 0.1862,
+    "rouge_l": 0.1613
+  },
+  "Property": {
+    "n": 40,
+    "recall_at_1": 0.825,
+    "mrr": 0.8542,
+    "token_f1": 0.1889,
+    "rouge_l": 0.1652
+  },
+  "Service": {
+    "n": 39,
+    "recall_at_1": 0.8462,
+    "mrr": 0.8808,
+    "token_f1": 0.1528,
+    "rouge_l": 0.1226
+  },
+  "macro_avg": {
+    "recall_at_1": 0.7318,
+    "mrr": 0.7869,
+    "token_f1": 0.1787,
+    "rouge_l": 0.1526
+  }
+}

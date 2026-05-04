@@ -3,7 +3,8 @@
   "split": "train",
   "eval_size": 500,
   "retrieval_corpus_size": 20000,
-  "model_name": "google/flan-t5-base",
+  "model_name": "llama-3.1-8b-instant",
+  "answerer": "groq",
   "retriever": "bm25",
   "dense_model_name": null,
   "eval_file": "paper_artifacts/heldout_benchmark/eval.jsonl",
@@ -19,15 +20,22 @@
     "mrr": 0.7612690476190476
   },
   "answering": {
-    "context_support": 0.5936589593808537,
-    "exact_match": 0.01,
+    "context_support": 0.7939014409497008,
+    "exact_match": 0.008,
     "retrieval_rank": 1.366,
-    "rouge_l": 0.170826337570879,
-    "token_f1": 0.19222933479774457
+    "rouge_l": 0.4511641938716926,
+    "token_f1": 0.5338327348331958
   },
-  "seconds": 489.75,
+  "bertscore": {
+    "mean_bertscore_f1": 0.9103,
+    "model_type": "roberta-large",
+    "n": 500
+  },
+  "nli_faithfulness": {},
+  "extended_tasks": {},
+  "seconds": 3539.28,
   "inlegal_sim": {
-    "mean_inlegal_sim": 0.6271,
+    "mean_inlegal_sim": 0.9225,
     "model": "law-ai/InLegalBERT",
     "n": 500
   }

@@ -1,0 +1,5 @@
+{
+  "mean_inlegal_sim": 0.6101,
+  "model": "law-ai/InLegalBERT",
+  "n": 500
+}

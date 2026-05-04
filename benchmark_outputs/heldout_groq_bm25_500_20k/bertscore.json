@@ -1,0 +1,5 @@
+{
+  "mean_bertscore_f1": 0.9005,
+  "model_type": "roberta-large",
+  "n": 500
+}

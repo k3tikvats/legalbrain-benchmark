@@ -1,0 +1,113 @@
+{
+  "dataset": "Prarabdha/indian-legal-supervised-fine-tuning-data",
+  "split": "train",
+  "eval_size": 500,
+  "retrieval_corpus_size": 20000,
+  "model_name": "google/flan-t5-small",
+  "answerer": "seq2seq",
+  "retriever": "bm25",
+  "dense_model_name": null,
+  "eval_file": "paper_artifacts/heldout_benchmark/eval.jsonl",
+  "corpus_file": "paper_artifacts/heldout_benchmark/corpus.jsonl",
+  "device": "cuda",
+  "cuda_available": true,
+  "gpu_name": "NVIDIA GeForce RTX 3050 6GB Laptop GPU",
+  "use_retrieved_context": false,
+  "retrieval": {
+    "recall_at_1": 0.706,
+    "recall_at_5": 0.826,
+    "recall_at_10": 0.87,
+    "mrr": 0.7612690476190476
+  },
+  "answering": {
+    "context_support": 0.5873029276872325,
+    "exact_match": 0.008,
+    "retrieval_rank": 1.366,
+    "rouge_l": 0.14875165238037497,
+    "token_f1": 0.17326840535120894
+  },
+  "nli_faithfulness": {},
+  "extended_tasks": {
+    "domain_partitioned": {
+      "Civil": {
+        "n": 69,
+        "recall_at_1": 0.6377,
+        "mrr": 0.6912,
+        "token_f1": 0.1385,
+        "rouge_l": 0.1146
+      },
+      "Constitutional": {
+        "n": 171,
+        "recall_at_1": 0.7544,
+        "mrr": 0.8116,
+        "token_f1": 0.1756,
+        "rouge_l": 0.1532
+      },
+      "Contract": {
+        "n": 47,
+        "recall_at_1": 0.7234,
+        "mrr": 0.7871,
+        "token_f1": 0.1886,
+        "rouge_l": 0.1639
+      },
+      "Criminal": {
+        "n": 85,
+        "recall_at_1": 0.5176,
+        "mrr": 0.5972,
+        "token_f1": 0.1774,
+        "rouge_l": 0.1514
+      },
+      "Family": {
+        "n": 11,
+        "recall_at_1": 0.8182,
+        "mrr": 0.8864,
+        "token_f1": 0.2291,
+        "rouge_l": 0.1976
+      },
+      "Other": {
+        "n": 38,
+        "recall_at_1": 0.7105,
+        "mrr": 0.7406,
+        "token_f1": 0.1862,
+        "rouge_l": 0.1613
+      },
+      "Property": {
+        "n": 40,
+        "recall_at_1": 0.825,
+        "mrr": 0.8542,
+        "token_f1": 0.1889,
+        "rouge_l": 0.1652
+      },
+      "Service": {
+        "n": 39,
+        "recall_at_1": 0.8462,
+        "mrr": 0.8808,
+        "token_f1": 0.1528,
+        "rouge_l": 0.1226
+      },
+      "macro_avg": {
+        "recall_at_1": 0.7318,
+        "mrr": 0.7869,
+        "token_f1": 0.1787,
+        "rouge_l": 0.1526
+      }
+    },
+    "statute_citation": {
+      "n_rows_with_citations": 201,
+      "n_total_rows": 500,
+      "citation_coverage_pct": 40.2,
+      "n_pairs": 201,
+      "exact_citation_match": 0.2935,
+      "citation_token_f1": 0.2835
+    },
+    "unanswerable_detection": {
+      "has_answer_f1": 0.66711140760507,
+      "no_answer_f1": 0.001998001998001998,
+      "overall_f1": 0.33455470480153604,
+      "n_total": 1000,
+      "n_answerable": 500,
+      "n_unanswerable": 500
+    }
+  },
+  "seconds": 653.42
+}

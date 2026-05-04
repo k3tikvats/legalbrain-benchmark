@@ -138,6 +138,68 @@ class DenseRetriever:
         return [(int(index), float(scores[index])) for index in order[:top_k]]
 
 
+class InLegalBERTRetriever(DenseRetriever):
+    """Dense retriever backed by InLegalBERT (domain-adapted on Indian legal text).
+
+    Wraps DenseRetriever with the canonical ``law-ai/InLegalBERT`` model and
+    mean-pooling via sentence-transformers so the model can be used for
+    asymmetric passage retrieval without any fine-tuning.
+    """
+
+    def __init__(self, device: str = "auto", batch_size: int = 32):
+        super().__init__(
+            model_name="law-ai/InLegalBERT",
+            device=device,
+            batch_size=batch_size,
+        )
+
+
+class HybridRetriever:
+    """Reciprocal Rank Fusion of BM25 and a dense retriever.
+
+    Combines lexical (BM25) and semantic (dense) signals via RRF:
+        score(d) = Σ_r 1 / (k + rank_r(d))
+    where ``k=60`` is the standard RRF smoothing constant.
+    """
+
+    def __init__(
+        self,
+        dense_model_name: str = "BAAI/bge-base-en-v1.5",
+        device: str = "auto",
+        batch_size: int = 64,
+        rrf_k: int = 60,
+    ):
+        self.bm25 = BM25Retriever()
+        self.dense = DenseRetriever(
+            model_name=dense_model_name,
+            device=device,
+            batch_size=batch_size,
+        )
+        self.rrf_k = rrf_k
+        self._n_docs = 0
+
+    def fit(self, contexts: list[str]) -> None:
+        self._n_docs = len(contexts)
+        self.bm25.fit(contexts)
+        self.dense.fit(contexts)
+
+    def search(self, query: str, top_k: int = 10) -> list[tuple[int, float]]:
+        if self._n_docs == 0:
+            raise RuntimeError("Retriever has not been fitted.")
+        fetch_k = min(self._n_docs, max(top_k * 3, 100))
+        bm25_hits = self.bm25.search(query, top_k=fetch_k)
+        dense_hits = self.dense.search(query, top_k=fetch_k)
+
+        scores: dict[int, float] = {}
+        for rank, (doc_id, _) in enumerate(bm25_hits, start=1):
+            scores[doc_id] = scores.get(doc_id, 0.0) + 1.0 / (self.rrf_k + rank)
+        for rank, (doc_id, _) in enumerate(dense_hits, start=1):
+            scores[doc_id] = scores.get(doc_id, 0.0) + 1.0 / (self.rrf_k + rank)
+
+        ranked = sorted(scores.items(), key=lambda x: -x[1])
+        return ranked[:top_k]
+
+
 def retrieval_metrics(ranks: list[int | None], ks: tuple[int, ...] = (1, 5, 10)) -> dict:
     metrics: dict[str, float] = {}
     total = len(ranks)

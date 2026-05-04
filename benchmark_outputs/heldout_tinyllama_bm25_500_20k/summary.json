@@ -3,7 +3,8 @@
   "split": "train",
   "eval_size": 500,
   "retrieval_corpus_size": 20000,
-  "model_name": "google/flan-t5-base",
+  "model_name": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+  "answerer": "causal",
   "retriever": "bm25",
   "dense_model_name": null,
   "eval_file": "paper_artifacts/heldout_benchmark/eval.jsonl",
@@ -11,7 +12,7 @@
   "device": "cuda",
   "cuda_available": true,
   "gpu_name": "NVIDIA GeForce RTX 3050 6GB Laptop GPU",
-  "use_retrieved_context": false,
+  "use_retrieved_context": true,
   "retrieval": {
     "recall_at_1": 0.706,
     "recall_at_5": 0.826,
@@ -19,15 +20,22 @@
     "mrr": 0.7612690476190476
   },
   "answering": {
-    "context_support": 0.5936589593808537,
-    "exact_match": 0.01,
+    "context_support": 0.7581929025196609,
+    "exact_match": 0.02,
     "retrieval_rank": 1.366,
-    "rouge_l": 0.170826337570879,
-    "token_f1": 0.19222933479774457
+    "rouge_l": 0.4062035388973992,
+    "token_f1": 0.4719328228800521
   },
-  "seconds": 489.75,
+  "bertscore": {
+    "mean_bertscore_f1": 0.8985,
+    "model_type": "roberta-large",
+    "n": 500
+  },
+  "nli_faithfulness": {},
+  "extended_tasks": {},
+  "seconds": 2068.28,
   "inlegal_sim": {
-    "mean_inlegal_sim": 0.6271,
+    "mean_inlegal_sim": 0.9087,
     "model": "law-ai/InLegalBERT",
     "n": 500
   }

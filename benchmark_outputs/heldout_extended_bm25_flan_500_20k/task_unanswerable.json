@@ -1,0 +1,8 @@
+{
+  "has_answer_f1": 0.66711140760507,
+  "no_answer_f1": 0.001998001998001998,
+  "overall_f1": 0.33455470480153604,
+  "n_total": 1000,
+  "n_answerable": 500,
+  "n_unanswerable": 500
+}
