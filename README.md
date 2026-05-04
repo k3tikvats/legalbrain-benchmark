@@ -2,7 +2,7 @@
 
 **Submission**: NeurIPS 2026 Evaluations & Datasets Track  
 **Dataset**: [Prarabdha/indian-legal-supervised-fine-tuning-data](https://huggingface.co/datasets/Prarabdha/indian-legal-supervised-fine-tuning-data)  
-**Author**: Prarabdha Srivastava — kartikvats_23cs214@dtu.ac.in
+**Author**: Kartik Vats — kartikvats_23cs214@dtu.ac.in
 
 ---
 
