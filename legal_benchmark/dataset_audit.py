@@ -86,7 +86,7 @@ def legal_signal(row: dict) -> bool:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Audit dataset sample statistics.")
-    parser.add_argument("--dataset", default="Prarabdha/indian-legal-supervised-fine-tuning-data")
+    parser.add_argument("--dataset", default="CyCrawwler/LegalBrain-Indic-Legal-Corpus")
     parser.add_argument("--split", default="train")
     parser.add_argument("--sample-size", type=int, default=20000)
     parser.add_argument("--seed", type=int, default=2026)

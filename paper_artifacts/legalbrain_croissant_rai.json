@@ -36,6 +36,7 @@
       "@type": "@vocab"
     },
     "hasSyntheticData": "cr:hasSyntheticData",
+    "citeAs": "cr:citeAs",
     "wasDerivedFrom": {
       "@id": "http://www.w3.org/ns/prov#wasDerivedFrom",
       "@type": "@id"
@@ -44,18 +45,18 @@
   },
   "@type": "sc:Dataset",
   "conformsTo": "http://mlcommons.org/croissant/1.1",
-  "name": "indian-legal-supervised-fine-tuning-data",
+  "name": "LegalBrain-Indic-Legal-Corpus",
   "alternateName": [
-    "Prarabdha/indian-legal-supervised-fine-tuning-data",
+    "CyCrawwler/LegalBrain-Indic-Legal-Corpus",
     "LegalBrain Indic Legal Corpus"
   ],
   "description": "A large-scale multilingual Indian legal dataset curated for grounded legal question answering, supervised fine-tuning, retrieval-augmented generation, and legal NLP evaluation.",
-  "url": "https://huggingface.co/datasets/Prarabdha/indian-legal-supervised-fine-tuning-data",
-  "license": "https://choosealicense.com/licenses/apache-2.0/",
+  "url": "https://huggingface.co/datasets/CyCrawwler/LegalBrain-Indic-Legal-Corpus",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
   "creator": {
     "@type": "Person",
-    "name": "Prarabdha Srivastava",
-    "url": "https://huggingface.co/Prarabdha"
+    "name": "Kartik Vats",
+    "url": "https://huggingface.co/CyCrawwler"
   },
   "keywords": [
     "Indian legal NLP",
@@ -73,13 +74,16 @@
     "Croissant"
   ],
   "isLiveDataset": false,
+  "version": "1.0.0",
+  "datePublished": "2025-01-01",
+  "citeAs": "@misc{legalbrain2026,\n  author={Vats, Kartik},\n  title={LegalBrain Indic Legal Corpus},\n  year={2026},\n  howpublished={\\url{https://huggingface.co/datasets/CyCrawwler/LegalBrain-Indic-Legal-Corpus}},\n  note={CC BY 4.0 license}\n}",
   "distribution": [
     {
       "@type": "cr:FileObject",
       "@id": "repo",
       "name": "repo",
       "description": "The Hugging Face git repository.",
-      "contentUrl": "https://huggingface.co/datasets/Prarabdha/indian-legal-supervised-fine-tuning-data/tree/refs%2Fconvert%2Fparquet",
+      "contentUrl": "https://huggingface.co/datasets/CyCrawwler/LegalBrain-Indic-Legal-Corpus/tree/refs%2Fconvert%2Fparquet",
       "encodingFormat": "git+https",
       "sha256": "https://github.com/mlcommons/croissant/issues/80"
     },
@@ -119,7 +123,7 @@
     {
       "@type": "cr:RecordSet",
       "@id": "default",
-      "description": "Prarabdha/indian-legal-supervised-fine-tuning-data - default subset",
+      "description": "CyCrawwler/LegalBrain-Indic-Legal-Corpus - default subset",
       "field": [
         {
           "@type": "cr:Field",
@@ -188,7 +192,7 @@
   "dataLimitations": "The dataset is intended for research on Indian legal NLP, retrieval, grounded QA, summarization, and supervised fine-tuning. It is not validated for direct legal advice, automated legal decision-making, risk scoring, or replacement of qualified legal counsel. Coverage may be uneven across courts, jurisdictions, legal domains, languages, and time periods.",
   "dataBiases": "The dataset may reflect selection bias from public legal repositories, reporting bias in published judgments, OCR quality differences, English dominance in higher judiciary records, and social biases already present in legal proceedings. Models trained on the corpus may reproduce biased legal language or uneven performance across geography, language, caste, gender, religion, class, or procedural posture.",
   "personalSensitiveInformation": "Legal documents may contain party names, addresses, family relationships, criminal allegations, medical information, property details, financial information, caste or religion references, and other sensitive facts. Public availability does not eliminate privacy risk. Users should avoid re-identification, profiling, or deployment in settings that affect legal rights without human oversight.",
-  "dataUseCases": "Recommended uses include research on retrieval, grounded QA, summarization, legal information access, benchmark design, and supervised fine-tuning under human review. Not recommended uses include unsupervised legal advice, automated adjudication, predicting outcomes for real litigants, surveillance, profiling, or generating legal filings without lawyer review. Apache-2.0 is the derived dataset license reported on Hugging Face; downstream users should still verify upstream source-specific terms before commercial deployment.",
+  "dataUseCases": "Recommended uses include research on retrieval, grounded QA, summarization, legal information access, benchmark design, and supervised fine-tuning under human review. Not recommended uses include unsupervised legal advice, automated adjudication, predicting outcomes for real litigants, surveillance, profiling, or generating legal filings without lawyer review. CC BY 4.0 is the dataset license; attribution to the authors is required. Downstream users should still verify upstream source-specific terms before commercial deployment.",
   "dataSocialImpact": "Potential benefits include improved access to legal information, better tools for legal aid, and reproducible Indian legal NLP research. Risks include hallucinated legal advice, overreliance by non-experts, privacy leakage, and amplification of historical inequities in legal text. Mitigations include dataset documentation, benchmark reporting, disclaimers, filtering where appropriate, and human-in-the-loop deployment.",
   "hasSyntheticData": true,
   "wasDerivedFrom": [

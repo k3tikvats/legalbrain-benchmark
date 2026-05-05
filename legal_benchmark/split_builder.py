@@ -33,7 +33,7 @@ def write_jsonl(path: Path, rows: list[dict]) -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Build a derived held-out benchmark split.")
-    parser.add_argument("--dataset", default="Prarabdha/indian-legal-supervised-fine-tuning-data")
+    parser.add_argument("--dataset", default="CyCrawwler/LegalBrain-Indic-Legal-Corpus")
     parser.add_argument("--split", default="train")
     parser.add_argument("--sample-size", type=int, default=30000)
     parser.add_argument("--eval-size", type=int, default=500)

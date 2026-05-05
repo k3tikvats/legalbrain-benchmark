@@ -39,7 +39,7 @@ from legal_benchmark.tasks import run_all_tasks
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Benchmark Indian legal QA datasets.")
-    parser.add_argument("--dataset", default="Prarabdha/indian-legal-supervised-fine-tuning-data")
+    parser.add_argument("--dataset", default="CyCrawwler/LegalBrain-Indic-Legal-Corpus")
     parser.add_argument("--split", default="train")
     parser.add_argument("--eval-size", type=int, default=50)
     parser.add_argument("--retrieval-corpus-size", type=int, default=1000)

@@ -1,7 +1,7 @@
 # LegalBrain Indic Legal Corpus — NeurIPS 2026 E&D Benchmark
 
 **Submission**: NeurIPS 2026 Evaluations & Datasets Track  
-**Dataset**: [Prarabdha/indian-legal-supervised-fine-tuning-data](https://huggingface.co/datasets/Prarabdha/indian-legal-supervised-fine-tuning-data)  
+**Dataset**: [CyCrawwler/LegalBrain-Indic-Legal-Corpus](https://huggingface.co/datasets/CyCrawwler/LegalBrain-Indic-Legal-Corpus)  
 **Author**: Kartik Vats — kartikvats_23cs214@dtu.ac.in
 
 ---
@@ -44,6 +44,7 @@ Requires [uv](https://docs.astral.sh/uv/getting-started/installation/) and Pytho
 ```
 
 For CPU-only:
+
 ```powershell
 .\run_local_benchmark.ps1 -EvalSize 50 -RetrievalCorpusSize 500 -CpuOnly
 ```
@@ -92,18 +93,18 @@ uv run --python 3.11 --with-requirements requirements-cuda.txt `
 
 ### Table 1 — Retrieval (500 eval, 20k corpus, heldout split)
 
-| Retriever | R@1 | R@5 | R@10 | MRR |
-|---|---|---|---|---|
-| TF-IDF | 0.492 | 0.694 | 0.768 | 0.579 |
-| **BM25** | **0.706** | **0.826** | **0.870** | **0.761** |
-| MiniLM Dense | 0.394 | 0.584 | 0.626 | 0.473 |
+| Retriever    | R@1       | R@5       | R@10      | MRR       |
+| ------------ | --------- | --------- | --------- | --------- |
+| TF-IDF       | 0.492     | 0.694     | 0.768     | 0.579     |
+| **BM25**     | **0.706** | **0.826** | **0.870** | **0.761** |
+| MiniLM Dense | 0.394     | 0.584     | 0.626     | 0.473     |
 
 ### Table 2 — Generation (FLAN-T5-base, 500 eval, heldout split)
 
-| Context | EM | Token F1 | ROUGE-L | Grounding |
-|---|---|---|---|---|
-| Gold | 0.010 | 0.192 | 0.171 | 0.594 |
-| BM25 Retrieved | 0.010 | 0.163 | 0.146 | 0.574 |
+| Context        | EM    | Token F1 | ROUGE-L | Grounding |
+| -------------- | ----- | -------- | ------- | --------- |
+| Gold           | 0.010 | 0.192    | 0.171   | 0.594     |
+| BM25 Retrieved | 0.010 | 0.163    | 0.146   | 0.574     |
 
 All runs on NVIDIA GeForce RTX 3050 6GB Laptop GPU.
 
