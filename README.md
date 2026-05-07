@@ -1,7 +1,7 @@
 # LegalBrain Indic Legal Corpus — NeurIPS 2026 E&D Benchmark
 
 **Submission**: NeurIPS 2026 Evaluations & Datasets Track (anonymous + single-blind)
-**Dataset**: [CyCrawwler/LegalBrain-Indic-Legal-Corpus](https://huggingface.co/datasets/CyCrawwler/LegalBrain-Indic-Legal-Corpus) (mirror: [Prarabdha/indian-legal-supervised-fine-tuning-data](https://huggingface.co/datasets/Prarabdha/indian-legal-supervised-fine-tuning-data))
+**Dataset**: [CyCrawwler/LegalBrain-Indic-Legal-Corpus](https://huggingface.co/datasets/CyCrawwler/LegalBrain-Indic-Legal-Corpus) 
 **Code**: [github.com/k3tikvats/legalbrain-benchmark](https://github.com/k3tikvats/legalbrain-benchmark)
 **Licenses**: dataset CC BY 4.0 (derivative annotation layer); benchmark code Apache-2.0
 
