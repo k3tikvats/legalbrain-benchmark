@@ -1,8 +1,14 @@
 {
-  "has_answer_f1": 0.9145299145299145,
-  "no_answer_f1": 0.6595174262734583,
-  "overall_f1": 0.7870236704016864,
+  "has_answer_f1": 0.9145,
+  "no_answer_f1": 0.9248,
+  "overall_f1": 0.9197,
   "n_total": 1000,
   "n_answerable": 500,
-  "n_unanswerable": 500
+  "n_unanswerable": 500,
+  "tp_ans": 428,
+  "fp_ans": 8,
+  "fn_ans": 72,
+  "tp_una": 492,
+  "fp_una": 72,
+  "fn_una": 8
 }

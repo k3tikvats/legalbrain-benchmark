@@ -1,8 +1,9 @@
 # LegalBrain Indic Legal Corpus — NeurIPS 2026 E&D Benchmark
 
-**Submission**: NeurIPS 2026 Evaluations & Datasets Track  
-**Dataset**: [CyCrawwler/LegalBrain-Indic-Legal-Corpus](https://huggingface.co/datasets/CyCrawwler/LegalBrain-Indic-Legal-Corpus)  
-**Author**: Kartik Vats — kartikvats_23cs214@dtu.ac.in
+**Submission**: NeurIPS 2026 Evaluations & Datasets Track (anonymous + single-blind)
+**Dataset**: [CyCrawwler/LegalBrain-Indic-Legal-Corpus](https://huggingface.co/datasets/CyCrawwler/LegalBrain-Indic-Legal-Corpus) (mirror: [Prarabdha/indian-legal-supervised-fine-tuning-data](https://huggingface.co/datasets/Prarabdha/indian-legal-supervised-fine-tuning-data))
+**Code**: [github.com/k3tikvats/legalbrain-benchmark](https://github.com/k3tikvats/legalbrain-benchmark)
+**Licenses**: dataset CC BY 4.0 (derivative annotation layer); benchmark code Apache-2.0
 
 ---
 
@@ -112,7 +113,7 @@ All runs on NVIDIA GeForce RTX 3050 6GB Laptop GPU.
 
 ## Dataset
 
-~6M context-question-answer triples from publicly accessible Indian legal sources (Supreme Court, High Courts, Law Commission, Government acts). Apache-2.0 license. 9.1 GB.
+~6.06M context-question-answer triples (~9.1 GB Parquet) from publicly accessible Indian legal sources (Supreme Court, High Courts, Law Commission, Government acts). Released under **CC BY 4.0** at the derivative-dataset level on Hugging Face; the benchmark **code** in this repository is released separately under **Apache-2.0**. A 100-row JSONL sample for reviewer inspection lives at `paper_artifacts/NeurIPS_2026/legalbrain_sample_100.jsonl`.
 
 Croissant metadata with Responsible AI fields: `paper_artifacts/legalbrain_croissant_rai.json`
 

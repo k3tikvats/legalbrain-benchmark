@@ -1,0 +1,20 @@
+{
+  "dataset": "Prarabdha/indian-legal-supervised-fine-tuning-data",
+  "split": "train",
+  "eval_size": 500,
+  "retrieval_corpus_size": 20000,
+  "eval_file": "paper_artifacts/heldout_benchmark/eval.jsonl",
+  "corpus_file": "paper_artifacts/heldout_benchmark/corpus.jsonl",
+  "seed": 13,
+  "output_dir": "benchmark_outputs/heldout_rag_bm25_flan_t5_base_500_20k",
+  "model_name": "google/flan-t5-base",
+  "retriever": "bm25",
+  "dense_model_name": "sentence-transformers/all-MiniLM-L6-v2",
+  "dense_batch_size": 64,
+  "device": "auto",
+  "skip_generation": false,
+  "use_retrieved_context": true,
+  "max_context_chars": 3500,
+  "max_new_tokens": 128,
+  "no_streaming": false
+}

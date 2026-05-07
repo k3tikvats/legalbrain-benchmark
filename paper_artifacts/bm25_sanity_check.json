@@ -1,0 +1,25 @@
+{
+  "description": "rank_bm25.BM25Okapi sanity check vs custom BM25 in legal_benchmark/retrieval.py",
+  "note": "Java/Pyserini unavailable; rank_bm25.BM25Okapi used as standard reference",
+  "k1": 1.5,
+  "b": 0.75,
+  "rank_bm25_metrics": {
+    "R@1": 0.664,
+    "R@5": 0.808,
+    "R@10": 0.852,
+    "MRR": 0.7281,
+    "n_queries": 500
+  },
+  "custom_bm25_metrics": {
+    "R@1": 0.706,
+    "R@5": 0.826,
+    "R@10": 0.87,
+    "MRR": 0.761
+  },
+  "diffs": {
+    "R@1": -0.042,
+    "R@5": -0.018,
+    "R@10": -0.018,
+    "MRR": -0.0329
+  }
+}

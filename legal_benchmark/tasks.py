@@ -127,6 +127,15 @@ def score_unanswerable_predictions(
 
     A prediction is deemed "unanswerable" if the generated text contains
     canonical refuse phrases (case-insensitive substring match).
+
+    Confusion-matrix definitions (treating "answerable" as the positive class
+    for ``has_answer_f1`` and "unanswerable" as the positive class for
+    ``no_answer_f1``):
+
+        gold=T, pred=T  -> tp_ans, tn_una
+        gold=T, pred=F  -> fn_ans, fp_una   (model wrongly abstained)
+        gold=F, pred=T  -> fp_ans, fn_una   (model missed an abstention opportunity)
+        gold=F, pred=F  -> tn_ans, tp_una
     """
     _REFUSE_PATTERNS = [
         "does not provide",
@@ -145,43 +154,38 @@ def score_unanswerable_predictions(
     tp_una = fp_una = fn_una = 0
 
     for pred in predictions:
-        gold_ans = pred["is_answerable"]
+        gold_ans = bool(pred["is_answerable"])
         pred_ans = not _is_refused(pred.get("predicted_answer", ""))
 
         if gold_ans and pred_ans:
             tp_ans += 1
         elif gold_ans and not pred_ans:
             fn_ans += 1
+            fp_una += 1
         elif not gold_ans and pred_ans:
             fp_ans += 1
-        else:
-            tp_una += 1
-
-        if not gold_ans and not pred_ans:
-            pass  # already counted above
-        elif not gold_ans and pred_ans:
-            fp_una += 1
-        elif not gold_ans and not pred_ans:
-            tp_una += 1
-        else:
             fn_una += 1
+        else:  # gold=F, pred=F
+            tp_una += 1
 
     def _f1(tp: int, fp: int, fn: int) -> float:
-        if tp + fp == 0 or tp + fn == 0:
+        if tp == 0:
             return 0.0
         p = tp / (tp + fp)
         r = tp / (tp + fn)
-        return 2 * p * r / (p + r) if p + r else 0.0
+        return 2 * p * r / (p + r) if (p + r) else 0.0
 
     has_ans_f1 = _f1(tp_ans, fp_ans, fn_ans)
     no_ans_f1 = _f1(tp_una, fp_una, fn_una)
     return {
-        "has_answer_f1": has_ans_f1,
-        "no_answer_f1": no_ans_f1,
-        "overall_f1": (has_ans_f1 + no_ans_f1) / 2,
+        "has_answer_f1": round(has_ans_f1, 4),
+        "no_answer_f1": round(no_ans_f1, 4),
+        "overall_f1": round((has_ans_f1 + no_ans_f1) / 2, 4),
         "n_total": len(predictions),
-        "n_answerable": sum(p["is_answerable"] for p in predictions),
-        "n_unanswerable": sum(not p["is_answerable"] for p in predictions),
+        "n_answerable": sum(bool(p["is_answerable"]) for p in predictions),
+        "n_unanswerable": sum(not bool(p["is_answerable"]) for p in predictions),
+        "tp_ans": tp_ans, "fp_ans": fp_ans, "fn_ans": fn_ans,
+        "tp_una": tp_una, "fp_una": fp_una, "fn_una": fn_una,
     }
 
 
@@ -196,9 +200,14 @@ _DOMAIN_PATTERNS: dict[str, list[str]] = {
         r"bail|cognizable|fir|accused|prosecution|conviction|acquittal|punishment|sentence)\b",
     ],
     "Constitutional": [
-        r"\b(constitution|article \d+|fundamental right|directive principle|writ|habeas corpus|"
-        r"mandamus|certiorari|supreme court|high court|judicial review|constitutional|"
-        r"parliament|legislature|governor|president|amendment)\b",
+        # Tightened: drop generic court/government terms (supreme court, high court,
+        # judicial review, parliament, legislature, governor, president) that appear
+        # in nearly every Indian judgment regardless of substantive area, and require
+        # constitution-specific anchors. "amendment" qualified to constitutional amendment.
+        r"\b(constitution of india|article \d+|fundamental right|directive principle|"
+        r"writ petition|habeas corpus|mandamus|certiorari|quo warranto|"
+        r"basic structure|constitutional bench|constitutional amendment|"
+        r"constitutionally|preamble|seventh schedule)\b",
     ],
     "Civil": [
         r"\b(cpc|civil procedure|suit|plaintiff|defendant|decree|injunction|specific performance|"

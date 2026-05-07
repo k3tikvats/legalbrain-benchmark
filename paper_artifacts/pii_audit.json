@@ -1,0 +1,55 @@
+{
+  "description": "Empirical PII audit on heldout split",
+  "eval_500": {
+    "split_name": "eval_500",
+    "n_rows": 500,
+    "rows_with_any_pii_pattern": 21,
+    "rows_with_any_pii_pct": 4.2,
+    "per_field_rows_with_pii": {
+      "context": 21,
+      "question": 0,
+      "response": 3
+    },
+    "total_pattern_matches": {
+      "indian_mobile": 0,
+      "phone_dashed": 0,
+      "phone_paren": 0,
+      "email": 0,
+      "aadhaar_12digit": 0,
+      "pan_card": 0,
+      "fir_number": 0,
+      "case_number_neutral": 0,
+      "case_number_air": 13,
+      "address_pin": 7,
+      "url": 0,
+      "ip_address": 0,
+      "sensitive_terms": 39
+    }
+  },
+  "corpus_20k": {
+    "split_name": "corpus_20k",
+    "n_rows": 20000,
+    "rows_with_any_pii_pattern": 943,
+    "rows_with_any_pii_pct": 4.71,
+    "per_field_rows_with_pii": {
+      "context": 930,
+      "question": 67,
+      "response": 125
+    },
+    "total_pattern_matches": {
+      "indian_mobile": 8,
+      "phone_dashed": 1,
+      "phone_paren": 0,
+      "email": 0,
+      "aadhaar_12digit": 3,
+      "pan_card": 0,
+      "fir_number": 68,
+      "case_number_neutral": 1,
+      "case_number_air": 563,
+      "address_pin": 701,
+      "url": 0,
+      "ip_address": 2,
+      "sensitive_terms": 894
+    }
+  }
+}

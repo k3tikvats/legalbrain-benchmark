@@ -1,0 +1,35 @@
+{
+  "ngram": 8,
+  "threshold": 0.15,
+  "eval_rows": 500,
+  "corpus_rows_sampled": 5000,
+  "flagged_pairs": 4,
+  "flagged_pct": 0.8,
+  "mean_max_jaccard": 0.0065,
+  "flagged_examples": [
+    {
+      "eval_row_id": 22367,
+      "eval_question": "What is the date of the judgment in the case C W P No 19556 of 2007?",
+      "best_corpus_question": "What is the date of the judgment in the case CWJC No 6185 of 2008?",
+      "jaccard": 0.2
+    },
+    {
+      "eval_row_id": 5168,
+      "eval_question": "Could you explain the inherent powers of the High Court under Section 482 of the Code of Criminal Procedure?",
+      "best_corpus_question": "Could you please explain the jurisdiction of the High Court under Section 482 of the Code of Criminal Procedure?",
+      "jaccard": 0.3333
+    },
+    {
+      "eval_row_id": 13421,
+      "eval_question": "What is the date of the oral order in the Letters Patent Appeal No 239 of 2011?",
+      "best_corpus_question": "What is the date of the oral order in this case?",
+      "jaccard": 0.1667
+    },
+    {
+      "eval_row_id": 22296,
+      "eval_question": "What legal action can be taken if a party fails to appear in court?",
+      "best_corpus_question": "What legal action can be taken if a party fails to remove office objections as directed in a court order?",
+      "jaccard": 0.25
+    }
+  ]
+}

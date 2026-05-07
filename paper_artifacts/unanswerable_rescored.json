@@ -1,0 +1,30 @@
+{
+  "heldout_extended_flan_t5_base_500_20k": {
+    "has_answer_f1": 0.7167,
+    "no_answer_f1": 0.45,
+    "overall_f1": 0.5833,
+    "n_total": 1000,
+    "n_answerable": 500,
+    "n_unanswerable": 500,
+    "tp_ans": 473,
+    "fp_ans": 347,
+    "fn_ans": 27,
+    "tp_una": 153,
+    "fp_una": 27,
+    "fn_una": 347
+  },
+  "heldout_groq_bm25_500_20k": {
+    "has_answer_f1": 0.9145,
+    "no_answer_f1": 0.9248,
+    "overall_f1": 0.9197,
+    "n_total": 1000,
+    "n_answerable": 500,
+    "n_unanswerable": 500,
+    "tp_ans": 428,
+    "fp_ans": 8,
+    "fn_ans": 72,
+    "tp_una": 492,
+    "fp_una": 72,
+    "fn_una": 8
+  }
+}

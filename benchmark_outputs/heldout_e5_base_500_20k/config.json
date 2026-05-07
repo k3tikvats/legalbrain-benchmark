@@ -1,0 +1,6 @@
+{
+  "model": "intfloat/e5-base-v2",
+  "retriever": "e5_base_v2",
+  "prefix_strategy": "query:/passage:",
+  "corpus_size": 20500
+}

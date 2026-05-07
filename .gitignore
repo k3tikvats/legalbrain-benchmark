@@ -1,56 +1,12 @@
-# HuggingFace and model caches (large)
+# ── Caches & tool directories ─────────────────────────────────────────────────
 .hf-cache/
 .uv-cache/
 .uv-python/
+.codex-hf-cache/
+.codex-uv-cache/
+.codex-uv-python/
 
-# Benchmark outputs (large jsonl prediction files + configs)
-benchmark_outputs/*/predictions.jsonl
-benchmark_outputs/*/config.json
-
-# Heldout benchmark data (large jsonl files — described in paper)
-paper_artifacts/heldout_benchmark/eval.jsonl
-paper_artifacts/heldout_benchmark/corpus.jsonl
-
-# Notebooks (may contain secrets / API keys)
-*.ipynb
-
-# Compiled PDFs (compile from .tex source)
-*.pdf
-
-# HuggingFace readme / dataset card drafts
-readme_huggingface.txt
-paper_artifacts/huggingface_dataset_card.md
-
-# Zip archives (LaTeX template downloads)
-*.zip
-
-# Raw CSV error analysis files
-*.csv
-
-# Draft / working files not needed for review
-paper_artifacts/neurips_ed_draft.tex
-paper_artifacts/croissant_rai_fields_template.json
-paper_artifacts/manual_error_analysis_instructions.md
-paper_artifacts/responsible_ai_metadata_draft.md
-paper_artifacts/NeurIPS_2026/README_LEGALBRAIN.md
-paper_artifacts/heldout_error_analysis_reviewed.md
-paper_artifacts/provenance_licensing_due_diligence.md
-paper_artifacts/submission_checklist.md
-paper_artifacts/results_tables.md
-
-# NeurIPS template example file (not the actual paper)
-paper_artifacts/NeurIPS_2026/neurips_2026.tex
-# Blank checklist template (checklist_completed.tex has the answers)
-paper_artifacts/NeurIPS_2026/checklist.tex
-
-# Kaggle instructions (not needed for local review)
-KAGGLE_RUN.md
-
-# Local GPU runner and CUDA-specific requirements
-run_local_benchmark.ps1
-requirements-cuda.txt
-
-# Python
+# ── Python virtual environment & bytecode ─────────────────────────────────────
 __pycache__/
 *.pyc
 *.pyo
@@ -58,7 +14,7 @@ __pycache__/
 .venv/
 venv/
 
-# LaTeX build artifacts
+# ── LaTeX build artifacts ──────────────────────────────────────────────────────
 *.aux
 *.bbl
 *.blg
@@ -68,6 +24,68 @@ venv/
 *.fls
 *.fdb_latexmk
 
-# OS
+# ── OS noise ───────────────────────────────────────────────────────────────────
 .DS_Store
 Thumbs.db
+
+# ── Sensitive / internal / operational files ──────────────────────────────────
+plan_for_claude_sonnet4.6.md
+HANDOFF_FOR_NEXT_AGENT.md
+KAGGLE_RUN.md
+readme_huggingface.txt
+BENCHMARKING.md
+
+# ── Binary / downloaded tools ─────────────────────────────────────────────────
+tectonic.exe
+tectonic.zip
+paper_artifacts/Formatting_Instructions_For_NeurIPS_2026.zip
+paper_artifacts/NeurIPS_2026.zip
+paper_artifacts/NeurIPS_2026_final.zip
+
+# ── Old / draft paper PDF ──────────────────────────────────────────────────────
+Legal_Research_paper.pdf
+
+# ── Internal draft & working docs ─────────────────────────────────────────────
+paper_artifacts/responsible_ai_metadata_draft.md
+paper_artifacts/croissant_rai_fields_template.json
+paper_artifacts/failure_summary.md
+paper_artifacts/submission_checklist.md
+paper_artifacts/manual_error_analysis_instructions.md
+paper_artifacts/results_tables.md
+paper_artifacts/heldout_results_tables.md
+paper_artifacts/huggingface_dataset_card.md
+paper_artifacts/dataset_audit/
+paper_artifacts/error_analysis_sample.csv
+
+# ── Full NeurIPS_2026 submission folder (PDF shared directly with reviewers) ───
+paper_artifacts/NeurIPS_2026/
+
+# ── Shadow-reference intermediate files (large, not in paper) ─────────────────
+paper_artifacts/shadow_references_*.jsonl
+paper_artifacts/shadow_scores_*.json
+paper_artifacts/_shadow_refs_run.log
+
+# ── Held-out benchmark data (56 MB corpus; reproducible via split_builder.py) ─
+paper_artifacts/heldout_benchmark/
+
+# ── Empty / incomplete dev-run stubs ──────────────────────────────────────────
+benchmark_outputs/heldout_bge_base/
+
+# ── Exploratory / non-final benchmark runs ────────────────────────────────────
+benchmark_outputs/flan_small_50/
+benchmark_outputs/flan_t5_base_500_20k/
+benchmark_outputs/rag_flan_t5_base_500_20k/
+benchmark_outputs/retrieval_500_10k/
+benchmark_outputs/kaggle_flan_t5_base_500/
+benchmark_outputs/local_run/
+benchmark_outputs/_flan_unanswerable_rerun.log
+benchmark_outputs/extended_groq_bm25.log
+
+# ── Benchmark runs for models not reported in the paper ───────────────────────
+benchmark_outputs/heldout_gemma9b_bm25_500_20k/
+benchmark_outputs/heldout_gptoss20b_bm25_500_20k/
+benchmark_outputs/heldout_groq70b_bm25_500_20k/
+
+# ── Large raw prediction dumps in final runs (scores/config kept) ─────────────
+benchmark_outputs/*/predictions.jsonl
+benchmark_outputs/*/task_*_predictions.jsonl
